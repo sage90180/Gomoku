@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Square from "./Square"
-import {useState,useRef} from "react"
+import {useState} from "react"
 
 const PlayerStatus = styled.div`
   font-size: 20px;
