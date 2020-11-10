@@ -31,36 +31,37 @@ const SquareWrap = styled.div`
     transform: translateX(-50%)
   }
   .white {
-    width: 20px;
-    height: 20px;
-    background: white;
+    width: 23px;
+    height: 23px;
+    background: radial-gradient(circle at 35% 25%,
+        white 0%,#eee 30%,#ccc 60%,#bbb 80%,#aaa 95%,#999 100%);
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
     border-radius: 25px;
     z-index: 997;
-    box-shadow: 0px 0px 7px rgba(0,0,0,.5)
+    box-shadow: 0px 0px 5px rgba(0,0,0,.1)
   }
   .black {
-    width: 20px;
-    height: 20px;
-    background: #333;
+    width: 23px;
+    height: 23px;
+    background: radial-gradient(circle at 35% 25%,
+        #999 0%,#000 90%,#666 95%,#999 100%);
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
     border-radius: 25px;
     z-index: 998;
-    box-shadow: 0px 0px 7px rgba(0,0,0,.5);
+    box-shadow: 0px 0px 5px rgba(0,0,0,.3);
   }
 `;
 
-function Square({indexX,indexY}) {
-  const [chess, setChess] = useState('')
+function Square({value,handleClick}) {
   return (
-    <SquareWrap onClick={() => setChess('white')}>  
-      <div className={chess}></div>
+    <SquareWrap onClick={handleClick}>  
+      <div className={value}></div>
     </SquareWrap>
   );
 }
