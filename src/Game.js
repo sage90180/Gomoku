@@ -1,14 +1,27 @@
 import styled from "styled-components";
 import Square from "./Square"
 import {useState} from "react"
+import calculateWinner from "./calculateWinner"
 
 const GameWrap = styled.div``;
 
 const PlayerStatus = styled.div`
-  font-size: 20px;
+  font-size: 23px;
   color: #333;
-  margin-bottom: 10px;
-  font-weight: 900
+  margin-bottom: 15px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  .restart-btn {
+    font-size: 20px;
+    font-weight: 500;
+    border: solid 2px white;
+    padding: 5px 10px;
+    letter-spacing: 2px;
+    box-shadow: 0px 0px 10px rgba(0,0,0,.4);
+  }
 `
 
 const BoardWrap = styled.div`
@@ -28,7 +41,7 @@ const BoardWrap = styled.div`
     top: 0px;
     width: 570px;
     height: 570px;
-    border: solid 15px #666;
+    border: solid 15px #777;
     z-index: 1
   }
 `;
@@ -36,22 +49,34 @@ const BoardWrap = styled.div`
 function Game() {
   const [squares, setSquares] = useState(Array(19).fill(Array(19).fill(null)))
   const [xIsNext, setXisNext] = useState(true)
-  const [winner,SetWinner] = useState()
+  let status;
+  const winner = calculateWinner(squares);
+  if (winner) {
+    status = '獲勝者：' + (winner==='black'?  '黑子':'白子')
+  } else {
+    status = '下一位： ' + (xIsNext ? '黑子' : '白子');
+  }
   const handleClick = (x,y,xIsNext) =>{
-    const newBoard = JSON.parse(JSON.stringify(squares))
-    newBoard[x][y] = xIsNext? 'black':'white'
+  const newBoard = JSON.parse(JSON.stringify(squares))
     setSquares(newBoard)
     if(calculateWinner(newBoard)){
-      SetWinner(xIsNext? '黑子':'白子')
       return
     }
-    setSquares(newBoard)
-    setXisNext(xIsNext=!xIsNext)
+    if(newBoard[x][y] === null){
+      newBoard[x][y] = xIsNext? 'black':'white'
+      setXisNext(xIsNext=!xIsNext)
+    }
+  }
+  const restart = () => {
+    setSquares(Array(19).fill(Array(19).fill(null)))
+    setXisNext(true)
   }
   return (
     <GameWrap>
-      <PlayerStatus>下一位玩家：{xIsNext? '黑子':'白子'}</PlayerStatus>
-      <PlayerStatus>獲勝：{winner}</PlayerStatus>
+      <PlayerStatus>
+        <div>{status}</div>
+        <div className='restart-btn' onClick={restart}>開新局</div>
+      </PlayerStatus>
       <BoardWrap>
       {
         squares.map((square, indexY)=>(
@@ -68,64 +93,4 @@ function Game() {
   );
 }
 export default Game;
-
-
-function calculateWinner (squares) {
-  for (let x = 0; x < 19; x++) {
-    for (let y = 0; y < 15; y++) {
-      if (
-        squares[0 + x][0 + y] !== null &&
-        squares[0 + x][0 + y] === squares[0 + x][1 + y] &&
-        squares[0 + x][0 + y] === squares[0 + x][2 + y] &&
-        squares[0 + x][0 + y] === squares[0 + x][3 + y] &&
-        squares[0 + x][0 + y] === squares[0 + x][4 + y]
-        ) {
-        return squares[0 + x][0 + y]
-      }
-    }
-  }
-  for (let x = 0; x < 15; x++) {
-    for (let y = 0; y < 19; y++) {
-      if (
-        squares[0 + x][0 + y] !== null &&
-        squares[0 + x][0 + y] === squares[1 + x][0 + y] &&
-        squares[0 + x][0 + y] === squares[2 + x][0 + y] &&
-        squares[0 + x][0 + y] === squares[3 + x][0 + y] &&
-        squares[0 + x][0 + y] === squares[4 + x][0 + y]
-        ) {
-        return squares[0 + x][0 + y]
-      }
-    }
-  }
-  // 斜線 1 
-  for (let x = 0; x < 15; x++) {
-    for (let y = 0; y < 15; y++) {
-      if (
-        squares[0 + x][0 + y] !== null &&
-        squares[0 + x][0 + y] === squares[1 + x][1 + y] &&
-        squares[0 + x][0 + y] === squares[2 + x][2 + y] &&
-        squares[0 + x][0 + y] === squares[3 + x][3 + y] &&
-        squares[0 + x][0 + y] === squares[4 + x][4 + y]
-        ) {
-        console.log(squares[0 + x][0 + y])
-        return squares[0 + x][0 + y]
-      }
-    }
-  }
-  // 斜線 2
-  for (let x = 0; x < 15; x++) {
-    for (let y = 0; y < 15; y++) {
-      if (
-        squares[0 + x][4 + y] !== null &&
-        squares[0 + x][4 + y] === squares[1 + x][3 + y] &&
-        squares[0 + x][4 + y] === squares[2 + x][2 + y] &&
-        squares[0 + x][4 + y] === squares[3 + x][1 + y] &&
-        squares[0 + x][4 + y] === squares[4 + x][0 + y]
-        ) {
-        return squares[0 + x][4 + y]
-      }
-    }
-  }
-  return null
-}
 

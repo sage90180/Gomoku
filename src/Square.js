@@ -5,7 +5,7 @@ const SquareWrap = styled.div`
   height: 30px;
   position: relative;
   z-index: 999;
-  cursor: pointer;
+  cursor: crosshair;
   &:hover {
     box-shadow: 0px 0px 10px rgba(0,0,0,.1);
     background: rgba(0,0,0,.1);
@@ -15,7 +15,7 @@ const SquareWrap = styled.div`
     content: '';
     width: 100%;
     height: 1px;
-    background: #666;
+    background: #777;
     position: absolute;
     top: 50%;
     transform: translateY(-50%)
@@ -24,7 +24,7 @@ const SquareWrap = styled.div`
     content: '';
     height: 100%;
     width: 1px;
-    background: #666;
+    background: #777;
     position: absolute;
     left: 50%;
     transform: translateX(-50%)
