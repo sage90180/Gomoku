@@ -4,7 +4,6 @@ import {useState} from "react"
 import calculateWinner from "./calculateWinner"
 
 const GameWrap = styled.div``;
-
 const PlayerStatus = styled.div`
   font-size: 23px;
   color: #333;
@@ -23,7 +22,6 @@ const PlayerStatus = styled.div`
     box-shadow: 0px 0px 10px rgba(0,0,0,.4);
   }
 `
-
 const BoardWrap = styled.div`
   width: 570px;
   height: 570px;
