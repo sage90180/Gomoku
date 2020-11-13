@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.js": "/Gomoku/static/js/main.76a2f70b.chunk.js",
+    "main.js.map": "/Gomoku/static/js/main.76a2f70b.chunk.js.map",
+    "runtime-main.js": "/Gomoku/static/js/runtime-main.5e9efe39.js",
+    "runtime-main.js.map": "/Gomoku/static/js/runtime-main.5e9efe39.js.map",
+    "static/js/2.2cddab71.chunk.js": "/Gomoku/static/js/2.2cddab71.chunk.js",
+    "static/js/2.2cddab71.chunk.js.map": "/Gomoku/static/js/2.2cddab71.chunk.js.map",
+    "index.html": "/Gomoku/index.html",
+    "static/js/2.2cddab71.chunk.js.LICENSE.txt": "/Gomoku/static/js/2.2cddab71.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.5e9efe39.js",
+    "static/js/2.2cddab71.chunk.js",
+    "static/js/main.76a2f70b.chunk.js"
+  ]
+}
